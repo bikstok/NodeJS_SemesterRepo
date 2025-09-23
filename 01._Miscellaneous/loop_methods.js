@@ -81,5 +81,5 @@ const biggerPortiendDesserts = desserts.map((dessert) => ({
 console.log("biggerPortiendDesserts", biggerPortiendDesserts);
 
 
+numbers.map((element, index, array)  => (console.log(element, index, array) )) // implicit return
 
-    
