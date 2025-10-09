@@ -1,4 +1,29 @@
 #logo {
     min-height: 5vh;
-    height: 15vh;
+    height: 12vh;
+    border-radius: 50%;
+}
+/*
+nav {
+    height: 5vh;
+}
+
+main {
+    min-height: calc(100vh - 10vh);
+
+}
+footer {
+    height: 5vh;
+}
+*/ 
+
+body {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+main {
+    flex: 1;
 }

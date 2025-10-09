@@ -1,0 +1,10 @@
+
+dog-matches-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+#dog-matches-image {
+    height: 30vh;
+}
