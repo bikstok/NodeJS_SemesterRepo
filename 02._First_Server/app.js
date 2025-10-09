@@ -57,5 +57,22 @@ app.post("/fashionbrands", (req, res) => {
     res.send({data: req.body})
 })
 
-app.listen(8080);
+
+app.get("/proxy", (req, res) => {
+    fetch("https://google.com", {
+  method: "GET", 
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+    .then(response => {
+    return response.text();
+  })
+  .then(data => {
+    console.log(data);
+    res.send(data)
+  })
+})
+
+app.listen(9090);
 
