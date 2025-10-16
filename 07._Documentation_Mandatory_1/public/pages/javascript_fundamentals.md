@@ -16,7 +16,7 @@ var city = "Copenhagen"; // Old way, DON'T USE THIS
 
 ```javascript
 const MOMS = 0.25;
-PI = 0.25; // Error! Can't reassign const
+MOMS = 0.25; // Error! Can't reassign const
 
 let count = 0;
 count = 1; // This works fine
