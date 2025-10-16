@@ -8,18 +8,18 @@ console.log(process.PWD);
 app.use(express.static("public"));
 
 // ============================PAGES===================================
-import { frontpagePage, introductionPage, tutorialPage } from './util/pageUtil.js';
+import { frontpagePage, gitPage, expressPage } from './util/pageUtil.js';
 
 app.get("/", (req, res) => {
     res.send(frontpagePage)
 })
 
-app.get("/introduction", (req, res) => {
-    res.send(introductionPage)
+app.get("/git", (req, res) => {
+    res.send(gitPage)
 })
 
-app.get("/tutorial", (req, res) => {
-    res.send(tutorialPage);
+app.get("/express", (req, res) => {
+    res.send(expressPage);
 });
 
 
