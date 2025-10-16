@@ -1,4 +1,4 @@
-## GIT
+# GIT
 
 Git is a version control system for tracking changes in your project. You can initialize a local repository with:
 
