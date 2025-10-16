@@ -1,6 +1,6 @@
 {
-  "watch": ["server.js", "public"],
+  "watch": ["app.js", "07._Documentation_Mandatory_1/"],
   "ext": "js,html,css",
   "ignore": ["node_modules"],
-  "exec": "node server.js"
+  "exec": "node app.js"
 }
