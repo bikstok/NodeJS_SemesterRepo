@@ -16,9 +16,17 @@ export const gitPage = constructPage(gitHTML, {
     tabTitle: "NodeJS | Git"
 });
 
-// Tutorial page (Markdown)
+// Javescript Fundamentals (Markdown)
+const javascriptFundamentalsMD = readPage("./public/pages/javascript_fundamentals.md");
+const javascriptFundamentalsHTML = marked(javascriptFundamentalsMD);
+export const javascriptFundamentalsPage = constructPage(javascriptFundamentalsHTML, {
+    tabTitle: "NodeJS | Javascript Fundamentals"
+});
+
+
+// Installing NodeJS and Express (Markdown)
 const expressMD = readPage("./public/pages/express.md");
 const expressHTML = marked(expressMD);
 export const expressPage = constructPage(expressHTML, {
-    tabTitle: "Nodemon | Express Tutorial"
+    tabTitle: "NodeJS | Express & NodeJS Tutorial"
 });
