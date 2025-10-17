@@ -27,7 +27,14 @@ export const javascriptFundamentalsPage = constructPage(javascriptFundamentalsHT
 const restAPIMD = readPage("./public/pages/restapi.md");
 const restAPIHTML = marked(restAPIMD);
 export const restAPIPage = constructPage(restAPIHTML, {
-    tabTitle: "NodeJS | Javascript Fundamentals"
+    tabTitle: "NodeJS | REST API"
+});
+
+// RestAPI (Markdown)
+const exportImportStaticMD = readPage("./public/pages/export_import_static_files.md");
+const exportImportStaticHTML = marked(exportImportStaticMD);
+export const exportImportStaticPage = constructPage(exportImportStaticHTML, {
+    tabTitle: "NodeJS | Export, Import & Static Files"
 });
 
 
