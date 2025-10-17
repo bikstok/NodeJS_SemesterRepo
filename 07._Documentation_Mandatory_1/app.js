@@ -8,7 +8,7 @@ console.log(process.PWD);
 app.use(express.static("public"));
 
 // ============================PAGES===================================
-import { frontpagePage, gitPage, expressPage, javascriptFundamentalsPage, restAPIPage, exportImportStaticPage } from './util/pageUtil.js';
+import { frontpagePage, gitPage, expressPage, javascriptFundamentalsPage, restAPIPage, exportImportStaticPage, clientServerPage } from './util/pageUtil.js';
 
 app.get("/", (req, res) => {
     res.send(frontpagePage)
@@ -34,6 +34,9 @@ app.get("/exportImportStatic", (req, res) => {
     res.send(exportImportStaticPage);
 });
 
+app.get("/clientServer", (req, res) => {
+    res.send(clientServerPage);
+});
 
 
 // =============================SERVER=================================

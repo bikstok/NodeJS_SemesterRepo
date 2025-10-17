@@ -37,6 +37,12 @@ export const exportImportStaticPage = constructPage(exportImportStaticHTML, {
     tabTitle: "NodeJS | Export, Import & Static Files"
 });
 
+// ClientServer (Markdown)
+const clientServerMD = readPage("./public/pages/client_server.md");
+const clientServerHTML = marked(clientServerMD);
+export const clientServerPage = constructPage(clientServerHTML, {
+    tabTitle: "NodeJS | Client V Server & Enviroment Variables"
+});
 
 // Installing NodeJS and Express (Markdown)
 const expressMD = readPage("./public/pages/express.md");
