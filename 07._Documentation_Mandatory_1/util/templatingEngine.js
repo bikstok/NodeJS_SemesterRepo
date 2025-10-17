@@ -1,7 +1,8 @@
 import fs from 'fs';
+import path from 'path';
 
-const header = readPage("./public/components/header/header.html");
-const footer = readPage("./public/components/footer/footer.html");
+const header = readPage("public/components/header/header.html");
+const footer = readPage("public/components/footer/footer.html");
 
 const globalCssAndScripts = `
   <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" rel="stylesheet"/>
@@ -18,8 +19,8 @@ export function constructPage(pageContent, options = {}) {
      + footer;
 }
 
-
-
-export function readPage(path) {
-    return fs.readFileSync(path).toString();
+export function readPage(filePath) {
+    // Use path.join with process.cwd() to get absolute path
+    const absolutePath = path.join(process.cwd(), filePath);
+    return fs.readFileSync(absolutePath).toString();
 }
