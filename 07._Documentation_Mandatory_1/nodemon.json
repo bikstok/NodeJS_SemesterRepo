@@ -1,6 +1,6 @@
 {
-  "watch": ["app.js", "07._Documentation_Mandatory_1/"],
-  "ext": "js,html,css",
+  "watch": ["."],
+  "ext": "*",
   "ignore": ["node_modules"],
   "exec": "node app.js"
 }

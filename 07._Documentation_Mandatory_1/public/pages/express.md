@@ -46,7 +46,7 @@ Here is how the ``package.json`` looks for my DogInder school project:
     "Curry",
     "Spicy",
     "Dogs",
-    "smelly",
+    "Tech",
     "romance"
   ],
   "author": "",

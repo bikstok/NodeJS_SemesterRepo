@@ -8,7 +8,7 @@ console.log(process.PWD);
 app.use(express.static("public"));
 
 // ============================PAGES===================================
-import { frontpagePage, gitPage, expressPage, javascriptFundamentalsPage } from './util/pageUtil.js';
+import { frontpagePage, gitPage, expressPage, javascriptFundamentalsPage, restAPIPage } from './util/pageUtil.js';
 
 app.get("/", (req, res) => {
     res.send(frontpagePage)
@@ -26,6 +26,9 @@ app.get("/javascript", (req, res) => {
     res.send(javascriptFundamentalsPage);
 });
 
+app.get("/restAPI", (req, res) => {
+    res.send(restAPIPage);
+});
 
 // =============================SERVER=================================
 const env = {

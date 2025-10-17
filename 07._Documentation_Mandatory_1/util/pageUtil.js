@@ -23,6 +23,13 @@ export const javascriptFundamentalsPage = constructPage(javascriptFundamentalsHT
     tabTitle: "NodeJS | Javascript Fundamentals"
 });
 
+// RestAPI (Markdown)
+const restAPIMD = readPage("./public/pages/restapi.md");
+const restAPIHTML = marked(restAPIMD);
+export const restAPIPage = constructPage(restAPIHTML, {
+    tabTitle: "NodeJS | Javascript Fundamentals"
+});
+
 
 // Installing NodeJS and Express (Markdown)
 const expressMD = readPage("./public/pages/express.md");
