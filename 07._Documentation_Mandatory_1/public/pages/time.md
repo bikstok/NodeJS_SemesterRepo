@@ -14,9 +14,9 @@ We can get more specific types of times and dates. Year, month, day, min and sec
 
 ```js
 console.log("This year: ", timeNow.getFullYear());  //This year:  2025
-console.log("This month", timeNow.getMonth());        //This month 9
+console.log("This month", timeNow.getMonth());        //This month 10
 console.log("This day of the month", timeNow.getDate());    //  This day of the month 20
-console.log("This hour", timeNow.getHours());   //This hour 17
+console.log("This hour", timeNow.getHours());   //This hour 12
 console.log("This minute", timeNow.getMinutes());    //This minute 33
 console.log("This second", timeNow.getSeconds());    //This second 21
 ```
