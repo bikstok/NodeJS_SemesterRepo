@@ -9,7 +9,7 @@ app.use(express.static("public"));
 
 // ============================PAGES===================================
 import { frontpagePage, gitPage, expressPage, javascriptFundamentalsPage, restAPIPage, exportImportStaticPage, clientServerPage
-, timePage} from './util/pageUtil.js';
+, timePage, serverSideRenderingPage} from './util/pageUtil.js';
 
 app.get("/", (req, res) => {
     res.send(frontpagePage)
@@ -42,6 +42,11 @@ app.get("/clientServer", (req, res) => {
 app.get("/time", (req, res) => {
     res.send(timePage);
 });
+
+app.get("/serverSideRendering", (req, res) => {
+    res.send(serverSideRenderingPage);
+});
+
 
 
 // =============================SERVER=================================

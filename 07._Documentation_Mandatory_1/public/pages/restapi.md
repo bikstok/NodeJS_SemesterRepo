@@ -386,12 +386,12 @@ DELETE http://localhost:8080/greekgods/1
 
 ## Quick Checklist
 
- Use plural nouns for collections (`/greekgods` not `/greekgod`)  
- Use the right HTTP verb (GET, POST, PUT, PATCH, DELETE)  
- Use route params for IDs (`:id`)  
- Return consistent response format ({ data: ... })  
- Use proper status codes (200, 201, 404, 400)  
- Validate user input  
- Parse JSON with `express.json()`  
- Don't use verbs in URLs (`/greekgods` not `/getGreekGods`)  
- Make IDs auto-increment for new resources
+ - Use plural nouns for collections (`/greekgods` not `/greekgod`)  
+-  Use the right HTTP verb (GET, POST, PUT, PATCH, DELETE)  
+ - Use route params for IDs (`:id`)  
+ - Return consistent response format ({ data: ... })  
+ - Use proper status codes (200, 201, 404, 400)  
+-  Validate user input  
+ - Parse JSON with `express.json()`  
+ - Don't use verbs in URLs (`/greekgods` not `/getGreekGods`)  
+ - Make IDs auto-increment for new resources

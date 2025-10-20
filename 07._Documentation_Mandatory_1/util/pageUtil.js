@@ -23,6 +23,14 @@ export const javascriptFundamentalsPage = constructPage(javascriptFundamentalsHT
     tabTitle: "NodeJS | Javascript Fundamentals"
 });
 
+// Installing NodeJS and Express (Markdown)
+const expressMD = readPage("./public/pages/express.md");
+const expressHTML = marked(expressMD);
+export const expressPage = constructPage(expressHTML, {
+    tabTitle: "NodeJS | Express & NodeJS Tutorial"
+});
+
+
 // RestAPI (Markdown)
 const restAPIMD = readPage("./public/pages/restapi.md");
 const restAPIHTML = marked(restAPIMD);
@@ -30,7 +38,7 @@ export const restAPIPage = constructPage(restAPIHTML, {
     tabTitle: "NodeJS | REST API"
 });
 
-// RestAPI (Markdown)
+// ExportImportStatic (Markdown)
 const exportImportStaticMD = readPage("./public/pages/export_import_static_files.md");
 const exportImportStaticHTML = marked(exportImportStaticMD);
 export const exportImportStaticPage = constructPage(exportImportStaticHTML, {
@@ -44,17 +52,17 @@ export const clientServerPage = constructPage(clientServerHTML, {
     tabTitle: "NodeJS | Client V Server & Enviroment Variables"
 });
 
-// ClientServer (Markdown)
+// Time (Markdown)
 const timeMD = readPage("./public/pages/time.md");
 const timeHTML = marked(timeMD);
 export const timePage = constructPage(timeHTML, {
     tabTitle: "NodeJS | Time"
 });
 
-
-// Installing NodeJS and Express (Markdown)
-const expressMD = readPage("./public/pages/express.md");
-const expressHTML = marked(expressMD);
-export const expressPage = constructPage(expressHTML, {
-    tabTitle: "NodeJS | Express & NodeJS Tutorial"
+// Server Side Rendering (Markdown)
+const serverSideRenderingMD = readPage("./public/pages/server_side_rendering.md");
+const serverSideRenderingHTML = marked(serverSideRenderingMD);
+export const serverSideRenderingPage = constructPage(serverSideRenderingHTML, {
+    tabTitle: "NodeJS | Server Side Rendering"
 });
+
