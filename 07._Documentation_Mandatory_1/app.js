@@ -8,7 +8,8 @@ console.log(process.PWD);
 app.use(express.static("public"));
 
 // ============================PAGES===================================
-import { frontpagePage, gitPage, expressPage, javascriptFundamentalsPage, restAPIPage, exportImportStaticPage, clientServerPage } from './util/pageUtil.js';
+import { frontpagePage, gitPage, expressPage, javascriptFundamentalsPage, restAPIPage, exportImportStaticPage, clientServerPage
+, timePage} from './util/pageUtil.js';
 
 app.get("/", (req, res) => {
     res.send(frontpagePage)
@@ -38,6 +39,10 @@ app.get("/clientServer", (req, res) => {
     res.send(clientServerPage);
 });
 
+app.get("/time", (req, res) => {
+    res.send(timePage);
+});
+
 
 // =============================SERVER=================================
 const env = {
@@ -47,6 +52,6 @@ const env = {
 const PORT = Number(process.env.PORT) || 8080;
 
 app.listen(PORT, () => {
-  console.log("RUNNING SERVER ON PORT", PORT);
+  console.log("RUNNING SERVER ON PORT:", PORT);
 });
 

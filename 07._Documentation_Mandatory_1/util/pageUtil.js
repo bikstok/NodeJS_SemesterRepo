@@ -44,6 +44,14 @@ export const clientServerPage = constructPage(clientServerHTML, {
     tabTitle: "NodeJS | Client V Server & Enviroment Variables"
 });
 
+// ClientServer (Markdown)
+const timeMD = readPage("./public/pages/time.md");
+const timeHTML = marked(timeMD);
+export const timePage = constructPage(timeHTML, {
+    tabTitle: "NodeJS | Time"
+});
+
+
 // Installing NodeJS and Express (Markdown)
 const expressMD = readPage("./public/pages/express.md");
 const expressHTML = marked(expressMD);
