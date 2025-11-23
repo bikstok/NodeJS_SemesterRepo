@@ -1,0 +1,19 @@
+import express, { json } from 'express'
+
+const app = express();
+
+app.use(express.static('public'))
+
+
+app.use(express.json());
+
+import exercisesRouter from "./routers/exercisesRouter.js"
+app.use(exercisesRouter)
+import usersRouter from "./routers/usersRouter.js"
+app.use(usersRouter)
+
+const PORT = Number(process.env) || 8080;
+
+app.listen (PORT, () => {
+    console.log('sever is running on port', PORT)
+}) 

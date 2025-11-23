@@ -28,4 +28,4 @@ function getIndianProfile() {
     city: fakerEN_IN.location.city(),
   };
 }
-console.log(getIndianProfile());
+

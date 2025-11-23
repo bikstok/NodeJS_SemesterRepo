@@ -1,4 +1,4 @@
-import express from "express";
+import express, { urlencoded } from "express";
 import path from "path";
 
 const app = express();
@@ -6,32 +6,15 @@ const app = express();
 console.log(process.PWD);
 
 app.use(express.static("public"));
+app.use(express.urlencoded())
 
-// ============================PAGES===============================
+import matchesRouter from "./routers/matchesRouter.js"
+app.use(matchesRouter)
+import pagesRouter from  "./routers/pagesRouter.js"
+app.use(pagesRouter)
+import contactRouter from "./routers/contactRouter.js"
+app.use(contactRouter)
 
-
-
-
-import { frontpagePage, matchesPage } from "./util/pagesUtil.js";
-
-app.get("/", (req, res) => {
- // res.sendFile(path.resolve("public/pages/frontend/index.html"));
-    res.send(frontpagePage)
-});
-
-app.get("/matches", (req, res) => {
-  // res.sendFile(path.resolve("public/pages/matches/matches.html"));
-    res.send(matchesPage)
-});
-
-// =============================API=================================
-
-import { getMatches } from "./util/matchesUtil.js";
-
-app.get("/api/matches", async (req, res) => {
-  const matches = await getMatches();
-  res.send({ data: matches });
-});
 
 const env = {
   PORT: 666,
