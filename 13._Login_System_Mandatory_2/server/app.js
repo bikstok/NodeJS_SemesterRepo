@@ -1,13 +1,25 @@
 import "dotenv/config";
 import express from "express";
-import session from "express-session";
 
 const app = express();
 
 app.use(express.json());
 
+
+import session from "express-session";
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+}));
+
 import registerRouter from "./routers/registerRouter.js";
 app.use(registerRouter);
+
+import loginRouter from "./routers/loginRouter.js";
+app.use(loginRouter);
 
 
 
