@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "express": "^5.1.0",
-    "dotenv": "^16.3.1",
-    "type": "module"
-  }
-}
