@@ -39,7 +39,7 @@ router.post("/api/login", async (req, res) => {
     }
 
     
-    // Return user info (you can add JWT here later)
+    // Return user info
     return res.status(200).send({
       data: {
         id: user.id,
