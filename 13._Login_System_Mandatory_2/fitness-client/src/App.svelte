@@ -1,19 +1,38 @@
 <script>
-  import fitnessLogo from '/fitness_favicon.png'
+  import { Router, Link, Route } from "svelte-routing";
+  import { onMount } from "svelte";
+  import Register from './pages/Register/Register.svelte';
+  import Login from './pages/Login/Login.svelte'; // if you create a login page
+  import fitnessLogo from '/fitness_favicon.png';
 </script>
 
-<main>
-  <div>
-    <a href="https://fitogsund.dk/c/huse/broenshoej" target="_blank" rel="noreferrer">
-      <img src={fitnessLogo} class="logo" alt="Fitness Logo" />
-    </a>
-  </div>
-  <h1>Welcome to the FitLogger</h1>
-  <p>Track your fitness activities with ease!</p>
-  <p> Login below or register</p>
-  <a href="/login">Login</a> | <a href="/register">Register</a>
+<Router>
+  <main>
+    <div>
+      <a href="https://fitogsund.dk/c/huse/broenshoej" target="_blank" rel="noreferrer">
+        <img src={fitnessLogo} class="logo" alt="Fitness Logo" />
+      </a>
+    </div>
+    <h1>Welcome to the FitLogger</h1>
+    <p>Track your fitness activities with ease!</p>
+    <p>Login below or register</p>
 
-</main>
+   
+  <!-- Navigation -->
+  <nav>
+    <Link to="/">Home</Link>
+    <Link to="/login">Login</Link>
+    <Link to="/register">Register</Link>
+  </nav>
+
+  <!-- Routes using slots -->
+  <div>
+    <Route path="/login"> <Login /></Route>
+
+    <Route path="/register"><Register /> </Route>
+  </div>
+  </main>
+</Router>
 
 <style>
   .logo {
@@ -28,7 +47,16 @@
   .logo.svelte:hover {
     filter: drop-shadow(0 0 2em #ff3e00aa);
   }
-  .read-the-docs {
-    color: #888;
+  nav {
+    margin-top: 1em;
+    margin-bottom: 2em;
+  }
+  nav a {
+    margin-right: 1em;
+    text-decoration: none;
+    color: #646cff;
+  }
+  nav a:hover {
+    text-decoration: underline;
   }
 </style>

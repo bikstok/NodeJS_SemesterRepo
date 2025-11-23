@@ -1,56 +1,43 @@
 import { Router } from "express";
-import { comparePasswords } from "../util/passwordHashUtil.js"; 
+import { hashPassword } from "../util/passwordHashUtil.js";
 import supabase from "../util/supabaseUtil.js";
 
 const router = Router();
 
-router.post("/api/login", async (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
 
-  if (!email || !password) {
-    return res.status(400).send({ error: "Email and password are required" });
+router.post("/api/register", async (req, res) => {
+    const email = req.body.email;
+  const userName = req.body.username;
+  const password = req.body.registerPassword;
+
+  if (!email || !password || !userName) {
+    return res.status(400).send({ error: "A username, email and password is required" });
   }
 
   try {
-    // Get the user by email
-    const { data: users, error } = await supabase
+    const hashedPassword = await hashPassword(password);
+
+    const { data, error } = await supabase
       .from("users")
-      .select("*")
-      .eq("email", email)
-      .limit(1);
+      .insert([
+        {
+          email,
+          user_name: userName,
+          password: hashedPassword
+        },
+      ])
+      .select();
 
     if (error) {
-      console.error("Supabase error:", error);
-      return res.status(500).send({ error: "Database error" });
+      console.error(error);
+      return res.status(500).send({ error: "Could not create user" });
     }
 
-    const user = users[0];
-
-    if (!user) {
-      return res.status(401).send({ error: "User not found" });
-    }
-
-    // Compare the password with the hashed password in DB
-    const isValid = await comparePasswords(password, user.password);
-
-    if (!isValid) {
-      return res.status(401).send({ error: "Incorrect password" });
-    }
-
-    
-    // Return user info
-    return res.status(200).send({
-      data: {
-        id: user.id,
-        username: user.user_name,
-        email: user.email,
-      },
-    });
+    res.status(201).send({ data: "User created." });
   } catch (error) {
-    console.error("Login error:", error);
     return res.status(500).send({ error: "Internal server error" });
   }
+  
 });
 
 export default router;
