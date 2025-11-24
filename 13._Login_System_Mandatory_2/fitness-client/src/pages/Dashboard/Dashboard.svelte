@@ -1,52 +1,22 @@
 <script>
-	import { onMount } from "svelte";
-	import { navigate } from "svelte-routing";
-	import toastr from "toastr";
+	import { user } from '../../lib/stores/authStore.js';
+	import { navigate } from 'svelte-routing';
 
-	let loading = true;
-	let error = null;
-	let user = null;
-
-	onMount(async () => {
-		try {
-			const res = await fetch("http://localhost:8080/api/session", {
-				credentials: "include",
-			});
-
-			const data = await res.json();
-
-			if (!res.ok || !data.user) {
-				error = "Not logged in";
-				user = null;
-				toastr.error(error);
-			} else {
-				user = data.user;
-				toastr.success("Logged in successfully!");
-			}
-		} catch (err) {
-			console.error(err);
-			error = "Network error";
-			toastr.error(error);
-		} finally {
-			loading = false;
-		}
-	});
+	// Local reactive reference to the store value
+	$: auth = $user;
 </script>
 
 <main>
-	{#if loading}
+	{#if auth === undefined}
 		<p>Checking session…</p>
+	{:else if auth === null}
+		<h1>Not logged in</h1>
+		<p>
+			<a href="/login">Go to Login</a>
+		</p>
 	{:else}
-		{#if user}
-			<h1>Logged in successfully</h1>
-			<p>Your user id: <strong>{user.id}</strong></p>
-
-		{:else}
-			<h1>Not logged in</h1>
-			<p>
-				<a href="/login">Go to Login</a>
-			</p>
-		{/if}
+		<h1>Logged in successfully</h1>
+		<p>Your user id: <strong>{auth.id}</strong></p>
 	{/if}
 </main>
 
@@ -79,3 +49,4 @@
 		text-decoration: underline;
 	}
 </style>
+

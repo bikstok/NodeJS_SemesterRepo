@@ -1,6 +1,7 @@
 <script>
   import { navigate } from "svelte-routing";
   import toastr from "toastr";
+  import { loadSession } from '../../lib/stores/authStore.js';
 
   let email = "";
   let password = "";
@@ -25,9 +26,10 @@
         toastr.error(data.error || "Login failed");
         return;
       }
-
+      // Refresh auth state so protected routes render immediately
+      await loadSession();
+      navigate("/dashboard");
       toastr.success("Logged in!");
-      setTimeout(() => navigate("/dashboard"), 1000);
 
     } catch (err) {
       console.error(err);

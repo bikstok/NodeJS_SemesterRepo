@@ -1,12 +1,16 @@
 import { Router } from "express";
 import { comparePasswords } from "../util/passwordHashUtil.js";
 import supabase from "../util/supabaseUtil.js";
+import { Resend } from "resend";
 
-const router = Router(); 
+const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
+
+const router = Router();
 
 router.post("/api/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
 
   try {
     const { data: users, error } = await supabase
@@ -31,6 +35,20 @@ router.post("/api/login", async (req, res) => {
     }
 
     req.session.userId = user.id;
+
+    // Send email about login
+try {
+  const result = await resend.emails.send({
+    from: "verified-sender@yourdomain.com",
+    to: user.email,
+    subject: "New Login Detected",
+    html: `<p>Hello ${user.user_name},</p>
+           <p>Login detected from IP: <strong>${ip}</strong></p>`
+  });
+  console.log("Email sent:", result);
+} catch (err) {
+  console.error("Failed to send login notification email:", err);
+}
 
     res.status(200).send({
       data: {

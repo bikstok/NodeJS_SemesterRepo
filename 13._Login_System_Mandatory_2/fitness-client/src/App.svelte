@@ -1,8 +1,11 @@
 <script>
   import { Router, Link, Route, navigate } from "svelte-routing";
+  import { onMount } from 'svelte';
+  import { user, loadSession, clearUser } from './lib/stores/authStore.js';
   import Register from './pages/Register/Register.svelte';
   import Login from './pages/Login/Login.svelte'; 
   import Dashboard from './pages/Dashboard/Dashboard.svelte';
+  import PrivateRoute from './lib/PrivateRoute.svelte';
   import fitnessLogo from '/fitness_favicon.png';
   import toastr from 'toastr';
 
@@ -15,6 +18,7 @@
 
       if (res.ok) {
         toastr.success("Logged out successfully");
+        clearUser();
         navigate("/");
       } else {
         toastr.error("Logout failed");
@@ -23,6 +27,10 @@
       toastr.error("Network error");
     }
   }
+  // Load session once for the whole app so `$user` becomes available
+  onMount(() => {
+    loadSession();
+  });
 </script>
 
 <Router>
@@ -33,20 +41,26 @@
           <img src={fitnessLogo} class="logo" alt="Fitness Logo" />
         </a>
         <nav>
-          
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-          <Link to="/dashboard">Dashboard</Link>
+          {#if $user !== undefined && $user !== null}
+            <Link to="/dashboard">Dashboard</Link>
+          {:else}
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          {/if}
         </nav>
       </div>
       <div class="logout-button">
-        <button on:click={handleLogout}>Logout</button>
+        {#if $user !== undefined && $user !== null}
+          <button on:click={handleLogout}>Logout</button>
+        {/if}
       </div>
     </div>
   </header>
 
   <main>
-    <Route path="/dashboard"><Dashboard /></Route>
+    <PrivateRoute path="/dashboard" exact>
+      <Dashboard />
+    </PrivateRoute>
     <Route path="/login"><Login /></Route>
     <Route path="/register"><Register /></Route>
     <Route path="/" exact>
