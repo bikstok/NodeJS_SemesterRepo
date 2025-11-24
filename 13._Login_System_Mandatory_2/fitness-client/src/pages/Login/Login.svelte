@@ -68,10 +68,23 @@
     width: 100%;
     margin-bottom: 1em;
     padding: 0.5em;
+    font-size: 1em;
   }
 
   button {
-    padding: .7em 1.5em;
+    padding: 0.7em 1.5em;
+    font-size: 1em;
     cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #646cffaa;
+    color: white;
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.5em;
   }
 </style>

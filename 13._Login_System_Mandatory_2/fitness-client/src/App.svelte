@@ -1,62 +1,135 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
-  import { onMount } from "svelte";
+  import { Router, Link, Route, navigate } from "svelte-routing";
   import Register from './pages/Register/Register.svelte';
   import Login from './pages/Login/Login.svelte'; 
+  import Dashboard from './pages/Dashboard/Dashboard.svelte';
   import fitnessLogo from '/fitness_favicon.png';
   import toastr from 'toastr';
+
+  async function handleLogout() {
+    try {
+      const res = await fetch("http://localhost:8080/api/logout", {
+        method: "POST",
+        credentials: "include"
+      });
+
+      if (res.ok) {
+        toastr.success("Logged out successfully");
+        navigate("/");
+      } else {
+        toastr.error("Logout failed");
+      }
+    } catch (err) {
+      toastr.error("Network error");
+    }
+  }
 </script>
 
 <Router>
-  <main>
-    <div>
-      <a href="https://fitogsund.dk/c/huse/broenshoej" target="_blank" rel="noreferrer">
-        <img src={fitnessLogo} class="logo" alt="Fitness Logo" />
-      </a>
+  <header>
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="/" class="logo-link">
+          <img src={fitnessLogo} class="logo" alt="Fitness Logo" />
+        </a>
+        <nav>
+          
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+          <Link to="/dashboard">Dashboard</Link>
+        </nav>
+      </div>
+      <div class="nav-right">
+        <button on:click={handleLogout}>Logout</button>
+      </div>
     </div>
-    <h1>Welcome to the FitLogger</h1>
-    <p>Track your fitness activities with ease!</p>
-    <p>Login below or register</p>
+  </header>
 
-   
-  <!-- Navigation -->
-  <nav>
-    <Link to="/">Home</Link>
-    <Link to="/login">Login</Link>
-    <Link to="/register">Register</Link>
-  </nav>
-
-  <!-- Routes using slots -->
-  <div>
-    <Route path="/login"> <Login /></Route>
-    <Route path="/register"><Register /> </Route>
-  </div>
+  <main>
+    <Route path="/dashboard"><Dashboard /></Route>
+    <Route path="/login"><Login /></Route>
+    <Route path="/register"><Register /></Route>
+      <h1>Welcome to the FitLogger</h1>
+      <p>Track your fitness activities with ease!</p>
   </main>
 </Router>
 
 <style>
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #c5c7cf;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0.3em 1em; /* reduced vertical padding */
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5em; /* slightly tighter spacing */
+  }
+
   .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+    height: 2.5em; /* smaller logo */
+    transition: filter 0.3s;
   }
+
   .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 0.8em #646cffaa);
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
+
   nav {
-    margin-top: 1em;
-    margin-bottom: 2em;
+    display: flex;
+    gap: 0.8em; /* tighter spacing between links */
   }
+
   nav a {
-    margin-right: 1em;
     text-decoration: none;
     color: #646cff;
+    font-weight: 500;
+    font-size: 0.95rem; /* smaller font */
+    padding: 0.3em 0.5em; /* less padding */
+    transition: color 0.2s;
   }
+
   nav a:hover {
+    color: #ff3e00;
     text-decoration: underline;
   }
+
+  .nav-right button {
+    padding: 0.3em 0.8em; /* smaller button */
+    font-weight: 500;
+    font-size: 0.9rem; /* smaller text */
+    cursor: pointer;
+    border: none;
+    background-color: #ff3e00;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .nav-right button:hover {
+    background-color: #e63600;
+  }
+
+  main {
+    margin-top: 4.5em; /* leave less space for thinner header */
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2em;
+  }
 </style>
+
