@@ -1,12 +1,11 @@
-import { writable } from 'svelte/store';
+import { writable } from "svelte/store";
 
-// `undefined` -> loading, `null` -> not authenticated, object -> authenticated
 export const user = writable(undefined);
 
 export async function loadSession() {
   try {
-    const res = await fetch('http://localhost:8080/api/session', {
-      credentials: 'include',
+    const res = await fetch("http://localhost:8080/api/session", {
+      credentials: "include",
     });
 
     if (!res.ok) {
@@ -23,7 +22,7 @@ export async function loadSession() {
     user.set(null);
     return null;
   } catch (err) {
-    console.error('Error loading session:', err);
+    console.error("Error loading session:", err);
     user.set(null);
     return null;
   }

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { comparePasswords } from "../util/passwordHashUtil.js";
 import supabase from "../util/supabaseUtil.js";
 import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 const resend = new Resend(process.env.RESEND_EMAIL_API_KEY);
 
@@ -10,7 +11,7 @@ const router = Router();
 router.post("/api/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
   try {
     const { data: users, error } = await supabase
@@ -29,26 +30,25 @@ router.post("/api/login", async (req, res) => {
       return res.status(401).send({ error: "User not found" });
     }
 
-    const isValid = await comparePasswords(password, user.password);
-    if (!isValid) {
+    const isValidPassword = await comparePasswords(password, user.password);
+    if (!isValidPassword) {
       return res.status(401).send({ error: "Wrong password" });
     }
 
     req.session.userId = user.id;
 
-    // Send email about login
-try {
-  const result = await resend.emails.send({
-    from: "verified-sender@yourdomain.com",
-    to: user.email,
-    subject: "New Login Detected",
-    html: `<p>Hello ${user.user_name},</p>
-           <p>Login detected from IP: <strong>${ip}</strong></p>`
-  });
-  console.log("Email sent:", result);
-} catch (err) {
-  console.error("Failed to send login notification email:", err);
-}
+    try {
+      const result = await resend.emails.send({
+        from: "FitLogger Team <no-reply@fitlogger.dk>",
+        to: user.email,
+        subject: "New Login Detected",
+        html: `<p>Hello ${user.user_name},</p>
+           <p>Login detected from IP: <strong>${ip}</strong></p>`,
+      });
+      console.log("Email sent:", result);
+    } catch (err) {
+      console.error("Failed to send login notification email:", err);
+    }
 
     res.status(200).send({
       data: {

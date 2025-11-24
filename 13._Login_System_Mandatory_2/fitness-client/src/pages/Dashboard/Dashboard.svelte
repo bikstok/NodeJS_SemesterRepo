@@ -1,22 +1,18 @@
 <script>
 	import { user } from '../../lib/stores/authStore.js';
-	import { navigate } from 'svelte-routing';
-
-	// Local reactive reference to the store value
-	$: auth = $user;
 </script>
 
 <main>
-	{#if auth === undefined}
+	{#if $user === undefined}
 		<p>Checking session…</p>
-	{:else if auth === null}
+	{:else if $user === null}
 		<h1>Not logged in</h1>
 		<p>
 			<a href="/login">Go to Login</a>
 		</p>
 	{:else}
 		<h1>Logged in successfully</h1>
-		<p>Your user id: <strong>{auth.id}</strong></p>
+		<p>Your user id: <strong>{$user.id}</strong></p>
 	{/if}
 </main>
 

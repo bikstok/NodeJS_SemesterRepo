@@ -3,6 +3,4 @@ export function requireAuthentication(req, res, next) {
     return res.status(401).send("You must be logged in");
   }
   next();
-};
-
-
+}
