@@ -13,6 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -64,6 +67,22 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+ .logout-button button {
+    padding: 0.3em 0.8em; /* smaller button */
+    font-weight: 500;
+    font-size: 0.9rem; /* smaller text */
+    cursor: pointer;
+    border: none;
+    background-color: #ff3e00;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .logout-button button:hover {
+    background-color: #e63600;
+  }
 
 @media (prefers-color-scheme: light) {
   :root {

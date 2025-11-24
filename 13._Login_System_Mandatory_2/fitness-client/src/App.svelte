@@ -39,7 +39,7 @@
           <Link to="/dashboard">Dashboard</Link>
         </nav>
       </div>
-      <div class="nav-right">
+      <div class="logout-button">
         <button on:click={handleLogout}>Logout</button>
       </div>
     </div>
@@ -49,8 +49,10 @@
     <Route path="/dashboard"><Dashboard /></Route>
     <Route path="/login"><Login /></Route>
     <Route path="/register"><Register /></Route>
+    <Route path="/" exact>
       <h1>Welcome to the FitLogger</h1>
       <p>Track your fitness activities with ease!</p>
+    </Route>
   </main>
 </Router>
 
@@ -106,22 +108,6 @@
   nav a:hover {
     color: #ff3e00;
     text-decoration: underline;
-  }
-
-  .nav-right button {
-    padding: 0.3em 0.8em; /* smaller button */
-    font-weight: 500;
-    font-size: 0.9rem; /* smaller text */
-    cursor: pointer;
-    border: none;
-    background-color: #ff3e00;
-    color: white;
-    border-radius: 4px;
-    transition: background-color 0.2s;
-  }
-
-  .nav-right button:hover {
-    background-color: #e63600;
   }
 
   main {
