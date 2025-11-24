@@ -1,19 +1,14 @@
 <script>
-  import { onMount } from "svelte";
   import { navigate } from "svelte-routing";
+  import toastr from "toastr";
 
   let username = "";
   let email = "";
   let password = "";
-  let error = "";
-  let success = "";
 
   async function handleRegister() {
-    error = "";
-    success = "";
-
     if (!username || !email || !password) {
-      error = "All fields are required";
+      toastr.error("All fields are required");
       return;
     }
 
@@ -32,16 +27,18 @@
       const data = await res.json();
 
       if (!res.ok) {
-        error = data.error || "Registration failed";
-      } else {
-        success = "User registered successfully!";
-        formReset();
-        // Optional: redirect to login after 1.5s
-        setTimeout(() => navigate("/login"), 1500);
+        toastr.error(data.error || "Registration failed");
+        return;
       }
+
+      toastr.success("User registered successfully!");
+      formReset();
+
+      setTimeout(() => navigate("/login"), 1500);
+
     } catch (err) {
       console.error(err);
-      error = "Network error";
+      toastr.error("Network error");
     }
   }
 
@@ -55,32 +52,22 @@
 <main>
   <h1>Register</h1>
 
-  {#if error}
-    <p class="error">{error}</p>
-  {/if}
-
-  {#if success}
-    <p class="success">{success}</p>
-  {/if}
-
+  <!-- UI stays the same -->
   <form on:submit|preventDefault={handleRegister}>
     <label>
       Username:
       <input type="text" bind:value={username} placeholder="Enter username" />
     </label>
-    <br />
 
     <label>
       Email:
       <input type="email" bind:value={email} placeholder="Enter email" />
     </label>
-    <br />
 
     <label>
       Password:
       <input type="password" bind:value={password} placeholder="Enter password" />
     </label>
-    <br />
 
     <button type="submit">Register</button>
   </form>
@@ -118,13 +105,5 @@
     display: block;
     text-align: left;
     margin-bottom: 0.5em;
-  }
-
-  .error {
-    color: red;
-  }
-
-  .success {
-    color: green;
   }
 </style>

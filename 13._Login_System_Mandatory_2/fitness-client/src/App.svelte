@@ -2,8 +2,9 @@
   import { Router, Link, Route } from "svelte-routing";
   import { onMount } from "svelte";
   import Register from './pages/Register/Register.svelte';
-  import Login from './pages/Login/Login.svelte'; // if you create a login page
+  import Login from './pages/Login/Login.svelte'; 
   import fitnessLogo from '/fitness_favicon.png';
+  import toastr from 'toastr';
 </script>
 
 <Router>
@@ -28,7 +29,6 @@
   <!-- Routes using slots -->
   <div>
     <Route path="/login"> <Login /></Route>
-
     <Route path="/register"><Register /> </Route>
   </div>
   </main>
