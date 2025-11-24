@@ -1,0 +1,77 @@
+<script>
+  import { navigate } from "svelte-routing";
+  import toastr from "toastr";
+
+  let email = "";
+  let password = "";
+
+  async function handleLogin() {
+    if (!email || !password) {
+      toastr.error("Both fields are required");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:8080/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include",
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toastr.error(data.error || "Login failed");
+        return;
+      }
+
+      toastr.success("Logged in!");
+      setTimeout(() => navigate("/dashboard"), 1000);
+
+    } catch (err) {
+      console.error(err);
+      toastr.error("Network error");
+    }
+  }
+</script>
+
+<main>
+  <h1>Login</h1>
+
+  <form on:submit|preventDefault={handleLogin}>
+    <label>
+      Email:
+      <input type="email" bind:value={email} placeholder="Enter email" />
+    </label>
+
+    <label>
+      Password:
+      <input type="password" bind:value={password} placeholder="Enter password" />
+    </label>
+
+    <button type="submit">Login</button>
+  </form>
+</main>
+
+<style>
+  main {
+    max-width: 400px;
+    margin: 3em auto;
+    padding: 2em;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+    text-align: center;
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 1em;
+    padding: 0.5em;
+  }
+
+  button {
+    padding: .7em 1.5em;
+    cursor: pointer;
+  }
+</style>
